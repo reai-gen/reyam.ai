@@ -23,17 +23,17 @@ if (socialLinks.length) {
 
   if (footerLinks && footerGrid) {
     const footerActions = document.createElement('div');
-    footerActions.style.cssText = 'display:flex; flex-direction:column; align-items:flex-start; gap:18px;';
+    footerActions.className = 'footer-actions';
 
     const socialSection = document.createElement('div');
-    socialSection.style.cssText = 'display:flex; flex-direction:column; gap:10px;';
+    socialSection.className = 'footer-social-section';
 
     const socialLabel = document.createElement('span');
-    socialLabel.textContent = 'Stay updated on social media';
-    socialLabel.style.cssText = 'font-weight:700; color:#475569;';
+    socialLabel.className = 'footer-social-label';
+    socialLabel.textContent = 'Stay connected';
 
     const socialIcons = document.createElement('div');
-    socialIcons.style.cssText = 'display:flex; gap:10px;';
+    socialIcons.className = 'footer-social-icons';
 
     footerGrid.insertBefore(footerActions, footerLinks);
     footerActions.appendChild(footerLinks);
@@ -41,5 +41,19 @@ if (socialLinks.length) {
     socialLinks.forEach((link) => socialIcons.appendChild(link));
     socialSection.appendChild(socialIcons);
     footerActions.appendChild(socialSection);
+
+    const socialStyles = document.createElement('style');
+    socialStyles.textContent = `
+      .footer-actions { display: flex; flex-direction: column; align-items: flex-start; min-width: 320px; }
+      .footer-actions .footer-links { padding-bottom: 20px; }
+      .footer-social-section { width: 100%; display: flex; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--border); }
+      .footer-social-label { color: #64748b; font-weight: 700; font-size: .94rem; }
+      .footer-social-icons { display: flex; align-items: center; gap: 10px; }
+      .footer-social-icons .social-icon-link { width: 30px; height: 30px; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #64748b; }
+      .footer-social-icons .social-icon-link svg { width: 20px; height: 20px; }
+      .footer-social-icons .social-icon-link:hover { color: var(--primary); transform: none; box-shadow: none; }
+      @media (max-width: 840px) { .footer-actions { min-width: 0; width: 100%; } }
+    `;
+    document.head.appendChild(socialStyles);
   }
 }
